@@ -5,7 +5,7 @@ import com.haimeixianghao.demo1.dto.DeviceCreateDto;
 import com.haimeixianghao.demo1.dto.DeviceDto;
 import com.haimeixianghao.demo1.dto.DeviceUpdateDto;
 import com.haimeixianghao.demo1.mapper.DeviceMapper;
-import com.haimeixianghao.demo1.repository.DeviceRepository;
+import com.haimeixianghao.demo1.store.DeviceStore;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +16,9 @@ import java.util.stream.Stream;
 @Service
 public class DeviceService {
 
-    private final DeviceRepository repository;
+    private final DeviceStore repository;
 
-    public DeviceService(DeviceRepository repository) {
+    public DeviceService(DeviceStore repository) {
         this.repository = repository;
     }
 
