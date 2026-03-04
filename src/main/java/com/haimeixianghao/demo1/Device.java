@@ -23,9 +23,12 @@ public class Device {
     private Integer serviceLife;      // 使用年限（年）
     private String depreciationMethod; // 折旧方式
     private String location;         // 位置
-    
+    private String status;           // 设备状态: operating(运行中), idle(空闲), maintenance(维护中), offline(离线)
+    private String type;             // 设备类型
+    private String image;            // 设备图片URL
+
     // 扩展信息
-    private String technicalParams;  // 技术参数信息
+    private String technicalParams;  // 技术参数信息（JSON格式）
     private String sparePartsInfo;   // 备品备件信息
     
     // 系统字段

@@ -13,7 +13,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/devices")
+@RequestMapping(value = "/api/devices", produces = "application/json", consumes = "application/json")
 public class DeviceController {
 
     private final DeviceService service;
@@ -29,7 +29,7 @@ public class DeviceController {
         return ResponseEntity.created(location).body(created);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", consumes = "*/*")
     public ResponseEntity<DeviceDto> getById(@PathVariable Long id) {
         DeviceDto d = service.getById(id);
         if (d == null) return ResponseEntity.notFound().build();
@@ -43,17 +43,17 @@ public class DeviceController {
         return ResponseEntity.ok(updated);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}", consumes = "*/*")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         boolean ok = service.delete(id);
         if (!ok) return ResponseEntity.notFound().build();
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
+    @GetMapping(value = "", consumes = "*/*")
     public ResponseEntity<List<DeviceDto>> search(@RequestParam(value = "q", required = false) String q) {
         if (q == null || q.isBlank()) {
-            return ResponseEntity.ok(List.of());
+            return ResponseEntity.ok(service.findAll());
         }
         List<DeviceDto> list = service.searchByCodeOrName(q);
         return ResponseEntity.ok(list);

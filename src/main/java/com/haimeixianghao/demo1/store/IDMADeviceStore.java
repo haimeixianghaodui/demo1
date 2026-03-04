@@ -30,6 +30,11 @@ public class IDMADeviceStore implements DeviceStore {
     }
 
     @Override
+    public List<Device> findAll() {
+        throw new UnsupportedOperationException("iDMA integration not yet implemented");
+    }
+
+    @Override
     public List<Device> findByDeviceCodeContainingIgnoreCase(String deviceCode) {
         throw new UnsupportedOperationException("iDMA integration not yet implemented");
     }

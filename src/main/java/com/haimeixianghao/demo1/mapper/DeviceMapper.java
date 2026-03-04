@@ -23,6 +23,9 @@ public class DeviceMapper {
         dto.setServiceLife(d.getServiceLife());
         dto.setDepreciationMethod(d.getDepreciationMethod());
         dto.setLocation(d.getLocation());
+        dto.setStatus(d.getStatus());
+        dto.setType(d.getType());
+        dto.setImage(d.getImage());
         dto.setTechnicalParams(d.getTechnicalParams());
         dto.setSparePartsInfo(d.getSparePartsInfo());
         dto.setCreateTime(d.getCreateTime());

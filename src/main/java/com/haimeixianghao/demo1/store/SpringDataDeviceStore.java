@@ -4,6 +4,7 @@ import com.haimeixianghao.demo1.Device;
 import com.haimeixianghao.demo1.repository.DeviceRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,13 @@ public class SpringDataDeviceStore implements DeviceStore {
     @Override
     public Optional<Device> findById(Long id) {
         return repository.findById(id);
+    }
+
+    @Override
+    public List<Device> findAll() {
+        List<Device> devices = new ArrayList<>();
+        repository.findAll().forEach(devices::add);
+        return devices;
     }
 
     @Override

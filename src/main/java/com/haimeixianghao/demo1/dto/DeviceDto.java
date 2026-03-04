@@ -14,6 +14,9 @@ public class DeviceDto {
     private Integer serviceLife;
     private String depreciationMethod;
     private String location;
+    private String status;
+    private String type;
+    private String image;
     private String technicalParams;
     private String sparePartsInfo;
     private LocalDate createTime;
@@ -42,6 +45,12 @@ public class DeviceDto {
     public void setDepreciationMethod(String depreciationMethod) { this.depreciationMethod = depreciationMethod; }
     public String getLocation() { return location; }
     public void setLocation(String location) { this.location = location; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
+    public String getImage() { return image; }
+    public void setImage(String image) { this.image = image; }
     public String getTechnicalParams() { return technicalParams; }
     public void setTechnicalParams(String technicalParams) { this.technicalParams = technicalParams; }
     public String getSparePartsInfo() { return sparePartsInfo; }
