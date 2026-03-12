@@ -66,7 +66,7 @@ public class DataInitializerService {
         device1.setLocation("A车间-01区");
         device1.setStatus("operating");
         device1.setType("机床");
-        device1.setImage("https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400");
+        device1.setImage("https://images.cncjichuang.com/2019-12-13/9207e642-2097-443d-9df9-b41d9a16ce30.jpg");
         device1.setTechnicalParams(createParamsJson(
             Map.of("主轴转速", "8000rpm", "加工精度", "±0.005mm", "功率", "15kW", "重量", "3500kg")
         ));
@@ -88,7 +88,7 @@ public class DataInitializerService {
         device2.setLocation("质检中心-03区");
         device2.setStatus("operating");
         device2.setType("测量仪");
-        device2.setImage("https://images.unsplash.com/photo-1581092918056-0c4c3acd4c9f?w=400");
+        device2.setImage("http://sendy-cmm.com/userfiles/image/20230607/20230607213825_9714.png");
         device2.setTechnicalParams(createParamsJson(
             Map.of("测量范围", "1000x800x600mm", "精度", "1.5μm", "分辨率", "0.1μm")
         ));
@@ -110,7 +110,7 @@ public class DataInitializerService {
         device3.setLocation("铸造车间-01区");
         device3.setStatus("idle");
         device3.setType("铸造机");
-        device3.setImage("");
+        device3.setImage("http://www.kuntaizz.com/uploadfile/image/20210302/20210302141321_728049816.jpg");
         device3.setTechnicalParams(createParamsJson(
             Map.of("合模力", "2000kN", "模板尺寸", "800x800mm", "加热功率", "45kW")
         ));
@@ -132,7 +132,7 @@ public class DataInitializerService {
         device4.setLocation("加工车间-02区");
         device4.setStatus("operating");
         device4.setType("机床");
-        device4.setImage("");
+        device4.setImage("https://images.cncjichuang.com/2019-12-13/9207e642-2097-443d-9df9-b41d9a16ce30.jpg");
         device4.setTechnicalParams(createParamsJson(
             Map.of("主轴转速", "6000rpm", "工作台尺寸", "400x800mm", "功率", "11kW")
         ));
@@ -154,7 +154,7 @@ public class DataInitializerService {
         device5.setLocation("仓储中心");
         device5.setStatus("maintenance");
         device5.setType("叉车");
-        device5.setImage("https://images.unsplash.com/photo-1581092335871-4c7c7d2b5b3d?w=400");
+        device5.setImage("http://www.hangchasz.com/UpLoad/202212/2022121656622217.jpg");
         device5.setTechnicalParams(createParamsJson(
             Map.of("额定载荷", "3000kg", "起升高度", "3000mm", "电池容量", "48V/600Ah")
         ));
@@ -176,7 +176,7 @@ public class DataInitializerService {
         device6.setLocation("装配车间-05区");
         device6.setStatus("operating");
         device6.setType("机器人");
-        device6.setImage("https://images.unsplash.com/photo-1581092335871-4c7c7d2b5b3d?w=400");
+        device6.setImage("http://www.abbrobotgbs.com/uploads/191122/1-191122133334954.jpg");
         device6.setTechnicalParams(createParamsJson(
             Map.of("负载能力", "150kg", "工作半径", "2.6m", "重复精度", "0.05mm")
         ));
@@ -198,7 +198,7 @@ public class DataInitializerService {
         device7.setLocation("热处理车间-01");
         device7.setStatus("idle");
         device7.setType("热处理");
-        device7.setImage("");
+        device7.setImage("http://www.tjsaiyang.cn/siteimages/19772/2019082611043812.jpg");
         device7.setTechnicalParams(createParamsJson(
             Map.of("最高温度", "1200°C", "炉膛尺寸", "1000x800x600mm", "功率", "75kW")
         ));
