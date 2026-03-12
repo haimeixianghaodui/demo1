@@ -1,6 +1,6 @@
 package com.haimeixianghao.demo1.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class DeviceDto {
     private Long id;
@@ -10,8 +10,8 @@ public class DeviceDto {
     private String brand;
     private String model;
     private String supplier;
-    private LocalDate productionDate;
-    private Integer serviceLife;
+    private String productionDate;
+    private String serviceLife;
     private String depreciationMethod;
     private String location;
     private String status;
@@ -19,8 +19,8 @@ public class DeviceDto {
     private String image;
     private String technicalParams;
     private String sparePartsInfo;
-    private LocalDate createTime;
-    private LocalDate updateTime;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
 
     // getters and setters
     public Long getId() { return id; }
@@ -37,10 +37,10 @@ public class DeviceDto {
     public void setModel(String model) { this.model = model; }
     public String getSupplier() { return supplier; }
     public void setSupplier(String supplier) { this.supplier = supplier; }
-    public LocalDate getProductionDate() { return productionDate; }
-    public void setProductionDate(LocalDate productionDate) { this.productionDate = productionDate; }
-    public Integer getServiceLife() { return serviceLife; }
-    public void setServiceLife(Integer serviceLife) { this.serviceLife = serviceLife; }
+    public String getProductionDate() { return productionDate; }
+    public void setProductionDate(String productionDate) { this.productionDate = productionDate; }
+    public String getServiceLife() { return serviceLife; }
+    public void setServiceLife(String serviceLife) { this.serviceLife = serviceLife; }
     public String getDepreciationMethod() { return depreciationMethod; }
     public void setDepreciationMethod(String depreciationMethod) { this.depreciationMethod = depreciationMethod; }
     public String getLocation() { return location; }
@@ -55,9 +55,9 @@ public class DeviceDto {
     public void setTechnicalParams(String technicalParams) { this.technicalParams = technicalParams; }
     public String getSparePartsInfo() { return sparePartsInfo; }
     public void setSparePartsInfo(String sparePartsInfo) { this.sparePartsInfo = sparePartsInfo; }
-    public LocalDate getCreateTime() { return createTime; }
-    public void setCreateTime(LocalDate createTime) { this.createTime = createTime; }
-    public LocalDate getUpdateTime() { return updateTime; }
-    public void setUpdateTime(LocalDate updateTime) { this.updateTime = updateTime; }
+    public LocalDateTime getCreateTime() { return createTime; }
+    public void setCreateTime(LocalDateTime createTime) { this.createTime = createTime; }
+    public LocalDateTime getUpdateTime() { return updateTime; }
+    public void setUpdateTime(LocalDateTime updateTime) { this.updateTime = updateTime; }
 }
 

@@ -1,39 +1,36 @@
 package com.haimeixianghao.demo1.dto;
 
 import jakarta.validation.constraints.*;
-import java.time.LocalDate;
 
 public class DeviceUpdateDto {
-    @NotBlank
-    @Size(max = 255)
+    @NotBlank @Size(max = 100)
     private String deviceCode;
 
-    @NotBlank
-    @Size(max = 255)
+    @NotBlank @Size(max = 10)
     private String deviceName;
 
-    @Size(max = 255)
+    @Size(max = 20)
     private String manufacturer;
 
-    @Size(max = 255)
+    @Size(max = 20)
     private String brand;
 
-    @Size(max = 255)
+    @Size(max = 20)
     private String model;
 
-    @Size(max = 255)
+    @Size(max = 20)
     private String supplier;
 
-    @PastOrPresent
-    private LocalDate productionDate;
+    @Size(max = 20)
+    private String productionDate;
 
-    @Min(0)
-    private Integer serviceLife;
+    @Size(max = 20)
+    private String serviceLife;
 
-    @Size(max = 255)
+    @Size(max = 20)
     private String depreciationMethod;
 
-    @Size(max = 255)
+    @Size(max = 30)
     private String location;
 
     @Size(max = 2000)
@@ -55,10 +52,10 @@ public class DeviceUpdateDto {
     public void setModel(String model) { this.model = model; }
     public String getSupplier() { return supplier; }
     public void setSupplier(String supplier) { this.supplier = supplier; }
-    public LocalDate getProductionDate() { return productionDate; }
-    public void setProductionDate(LocalDate productionDate) { this.productionDate = productionDate; }
-    public Integer getServiceLife() { return serviceLife; }
-    public void setServiceLife(Integer serviceLife) { this.serviceLife = serviceLife; }
+    public String getProductionDate() { return productionDate; }
+    public void setProductionDate(String productionDate) { this.productionDate = productionDate; }
+    public String getServiceLife() { return serviceLife; }
+    public void setServiceLife(String serviceLife) { this.serviceLife = serviceLife; }
     public String getDepreciationMethod() { return depreciationMethod; }
     public void setDepreciationMethod(String depreciationMethod) { this.depreciationMethod = depreciationMethod; }
     public String getLocation() { return location; }
@@ -68,4 +65,3 @@ public class DeviceUpdateDto {
     public String getSparePartsInfo() { return sparePartsInfo; }
     public void setSparePartsInfo(String sparePartsInfo) { this.sparePartsInfo = sparePartsInfo; }
 }
-

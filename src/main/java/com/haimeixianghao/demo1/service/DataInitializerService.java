@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -34,8 +34,8 @@ public class DataInitializerService {
         device1.setBrand("SMTCL");
         device1.setModel("CAK5085");
         device1.setSupplier("沈阳机床");
-        device1.setProductionDate(LocalDate.of(2023, 5, 10));
-        device1.setServiceLife(10);
+        device1.setProductionDate("2023-05-10");
+        device1.setServiceLife("10");
         device1.setDepreciationMethod("年限平均法");
         device1.setLocation("A车间-01区");
         device1.setStatus("operating");
@@ -44,19 +44,21 @@ public class DataInitializerService {
         device1.setTechnicalParams(createParamsJson(
             Map.of("主轴转速", "8000rpm", "加工精度", "±0.005mm", "功率", "15kW", "重量", "3500kg")
         ));
+        device1.setCreateTime(LocalDateTime.now());
+        device1.setUpdateTime(LocalDateTime.now());
         devices.add(device1);
 
         // Device 2: 三坐标测量仪
         Device device2 = new Device();
         device2.setDeviceCode("DEV002");
-        device2.setDeviceName("三坐标测量仪");
+        device2.setDeviceName("三坐标测量");
         device2.setManufacturer("海克斯康");
         device2.setBrand("Hexagon");
         device2.setModel("GLOBAL S");
         device2.setSupplier("海克斯康");
-        device2.setProductionDate(LocalDate.of(2023, 8, 15));
-        device2.setServiceLife(8);
-        device2.setDepreciationMethod("双倍余额递减法");
+        device2.setProductionDate("2023-08-15");
+        device2.setServiceLife("8");
+        device2.setDepreciationMethod("双倍余额递减");
         device2.setLocation("质检中心-03区");
         device2.setStatus("operating");
         device2.setType("测量仪");
@@ -64,6 +66,8 @@ public class DataInitializerService {
         device2.setTechnicalParams(createParamsJson(
             Map.of("测量范围", "1000x800x600mm", "精度", "1.5μm", "分辨率", "0.1μm")
         ));
+        device2.setCreateTime(LocalDateTime.now());
+        device2.setUpdateTime(LocalDateTime.now());
         devices.add(device2);
 
         // Device 3: 铸造机
@@ -74,8 +78,8 @@ public class DataInitializerService {
         device3.setBrand("Foundry");
         device3.setModel("ZJ-2000");
         device3.setSupplier("铸造机械厂");
-        device3.setProductionDate(LocalDate.of(2023, 2, 20));
-        device3.setServiceLife(15);
+        device3.setProductionDate("2023-02-20");
+        device3.setServiceLife("15");
         device3.setDepreciationMethod("年限平均法");
         device3.setLocation("铸造车间-01区");
         device3.setStatus("idle");
@@ -84,6 +88,8 @@ public class DataInitializerService {
         device3.setTechnicalParams(createParamsJson(
             Map.of("合模力", "2000kN", "模板尺寸", "800x800mm", "加热功率", "45kW")
         ));
+        device3.setCreateTime(LocalDateTime.now());
+        device3.setUpdateTime(LocalDateTime.now());
         devices.add(device3);
 
         // Device 4: 数控铣床
@@ -94,8 +100,8 @@ public class DataInitializerService {
         device4.setBrand("DMTG");
         device4.setModel("XK714");
         device4.setSupplier("大连机床");
-        device4.setProductionDate(LocalDate.of(2023, 6, 18));
-        device4.setServiceLife(10);
+        device4.setProductionDate("2023-06-18");
+        device4.setServiceLife("10");
         device4.setDepreciationMethod("年限平均法");
         device4.setLocation("加工车间-02区");
         device4.setStatus("operating");
@@ -104,6 +110,8 @@ public class DataInitializerService {
         device4.setTechnicalParams(createParamsJson(
             Map.of("主轴转速", "6000rpm", "工作台尺寸", "400x800mm", "功率", "11kW")
         ));
+        device4.setCreateTime(LocalDateTime.now());
+        device4.setUpdateTime(LocalDateTime.now());
         devices.add(device4);
 
         // Device 5: 叉车
@@ -114,9 +122,9 @@ public class DataInitializerService {
         device5.setBrand("HC");
         device5.setModel("CPD30");
         device5.setSupplier("杭叉集团");
-        device5.setProductionDate(LocalDate.of(2023, 9, 5));
-        device5.setServiceLife(8);
-        device5.setDepreciationMethod("双倍余额递减法");
+        device5.setProductionDate("2023-09-05");
+        device5.setServiceLife("8");
+        device5.setDepreciationMethod("双倍余额递减");
         device5.setLocation("仓储中心");
         device5.setStatus("maintenance");
         device5.setType("叉车");
@@ -124,6 +132,8 @@ public class DataInitializerService {
         device5.setTechnicalParams(createParamsJson(
             Map.of("额定载荷", "3000kg", "起升高度", "3000mm", "电池容量", "48V/600Ah")
         ));
+        device5.setCreateTime(LocalDateTime.now());
+        device5.setUpdateTime(LocalDateTime.now());
         devices.add(device5);
 
         // Device 6: 工业机器人
@@ -134,8 +144,8 @@ public class DataInitializerService {
         device6.setBrand("ABB");
         device6.setModel("IRB 6700");
         device6.setSupplier("ABB");
-        device6.setProductionDate(LocalDate.of(2023, 11, 20));
-        device6.setServiceLife(12);
+        device6.setProductionDate("2023-11-20");
+        device6.setServiceLife("12");
         device6.setDepreciationMethod("年限平均法");
         device6.setLocation("装配车间-05区");
         device6.setStatus("operating");
@@ -144,6 +154,8 @@ public class DataInitializerService {
         device6.setTechnicalParams(createParamsJson(
             Map.of("负载能力", "150kg", "工作半径", "2.6m", "重复精度", "0.05mm")
         ));
+        device6.setCreateTime(LocalDateTime.now());
+        device6.setUpdateTime(LocalDateTime.now());
         devices.add(device6);
 
         // Device 7: 热处理炉
@@ -154,16 +166,18 @@ public class DataInitializerService {
         device7.setBrand("HeatPro");
         device7.setModel("HT-1200");
         device7.setSupplier("热处理设备厂");
-        device7.setProductionDate(LocalDate.of(2023, 4, 12));
-        device7.setServiceLife(12);
+        device7.setProductionDate("2023-04-12");
+        device7.setServiceLife("12");
         device7.setDepreciationMethod("年限平均法");
-        device7.setLocation("热处理车间-01区");
+        device7.setLocation("热处理车间-01");
         device7.setStatus("idle");
         device7.setType("热处理");
         device7.setImage("");
         device7.setTechnicalParams(createParamsJson(
             Map.of("最高温度", "1200°C", "炉膛尺寸", "1000x800x600mm", "功率", "75kW")
         ));
+        device7.setCreateTime(LocalDateTime.now());
+        device7.setUpdateTime(LocalDateTime.now());
         devices.add(device7);
 
         // Device 8: 激光切割机
@@ -174,8 +188,8 @@ public class DataInitializerService {
         device8.setBrand("Han's Laser");
         device8.setModel("G3015F");
         device8.setSupplier("大族激光");
-        device8.setProductionDate(LocalDate.of(2023, 7, 22));
-        device8.setServiceLife(10);
+        device8.setProductionDate("2023-07-22");
+        device8.setServiceLife("10");
         device8.setDepreciationMethod("年限平均法");
         device8.setLocation("切割车间-02区");
         device8.setStatus("offline");
@@ -184,6 +198,8 @@ public class DataInitializerService {
         device8.setTechnicalParams(createParamsJson(
             Map.of("激光功率", "3000W", "切割厚度", "20mm", "工作台面", "1500x3000mm")
         ));
+        device8.setCreateTime(LocalDateTime.now());
+        device8.setUpdateTime(LocalDateTime.now());
         devices.add(device8);
 
         // 保存所有设备
@@ -224,3 +240,4 @@ public class DataInitializerService {
         return json.toString();
     }
 }
+

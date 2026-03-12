@@ -5,7 +5,7 @@ import com.haimeixianghao.demo1.dto.DeviceCreateDto;
 import com.haimeixianghao.demo1.dto.DeviceDto;
 import com.haimeixianghao.demo1.dto.DeviceUpdateDto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class DeviceMapper {
 
@@ -48,9 +48,8 @@ public class DeviceMapper {
         e.setLocation(dto.getLocation());
         e.setTechnicalParams(dto.getTechnicalParams());
         e.setSparePartsInfo(dto.getSparePartsInfo());
-        // createTime/updateTime handled by service
-        e.setCreateTime(LocalDate.now());
-        e.setUpdateTime(LocalDate.now());
+        e.setCreateTime(LocalDateTime.now());
+        e.setUpdateTime(LocalDateTime.now());
         return e;
     }
 
@@ -68,7 +67,6 @@ public class DeviceMapper {
         e.setLocation(dto.getLocation());
         e.setTechnicalParams(dto.getTechnicalParams());
         e.setSparePartsInfo(dto.getSparePartsInfo());
-        e.setUpdateTime(LocalDate.now());
+        e.setUpdateTime(LocalDateTime.now());
     }
 }
-
