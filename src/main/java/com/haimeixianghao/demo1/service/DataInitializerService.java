@@ -1,6 +1,8 @@
 package com.haimeixianghao.demo1.service;
 
 import com.haimeixianghao.demo1.Device;
+import com.haimeixianghao.demo1.entity.*;
+import com.haimeixianghao.demo1.repository.*;
 import com.haimeixianghao.demo1.store.DeviceStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +19,33 @@ public class DataInitializerService {
 
     private static final Logger log = LoggerFactory.getLogger(DataInitializerService.class);
     private final DeviceStore deviceStore;
+    private final PartRepository partRepository;
+    private final WorkingPlanRepository workingPlanRepository;
+    private final WorkingProcedureRepository workingProcedureRepository;
+    private final BlankManufacturingRepository blankManufacturingRepository;
+    private final MachiningRepository machiningRepository;
+    private final ShaftMachiningRepository shaftMachiningRepository;
+    private final DimensionalInspectingRepository dimensionalInspectingRepository;
+    private final WarehousingRepository warehousingRepository;
 
-    public DataInitializerService(DeviceStore deviceStore) {
+    public DataInitializerService(DeviceStore deviceStore,
+                                  PartRepository partRepository,
+                                  WorkingPlanRepository workingPlanRepository,
+                                  WorkingProcedureRepository workingProcedureRepository,
+                                  BlankManufacturingRepository blankManufacturingRepository,
+                                  MachiningRepository machiningRepository,
+                                  ShaftMachiningRepository shaftMachiningRepository,
+                                  DimensionalInspectingRepository dimensionalInspectingRepository,
+                                  WarehousingRepository warehousingRepository) {
         this.deviceStore = deviceStore;
+        this.partRepository = partRepository;
+        this.workingPlanRepository = workingPlanRepository;
+        this.workingProcedureRepository = workingProcedureRepository;
+        this.blankManufacturingRepository = blankManufacturingRepository;
+        this.machiningRepository = machiningRepository;
+        this.shaftMachiningRepository = shaftMachiningRepository;
+        this.dimensionalInspectingRepository = dimensionalInspectingRepository;
+        this.warehousingRepository = warehousingRepository;
     }
 
     @Transactional
@@ -223,6 +249,236 @@ public class DataInitializerService {
         log.info("验证：尝试查询所有设备...");
         List<Device> allDevices = deviceStore.findAll();
         log.info("验证结果：数据库中共有 {} 个设备", allDevices.size());
+    }
+
+    @Transactional
+    public void initializeMaterials() {
+        LocalDateTime now = LocalDateTime.now();
+
+        // MAT001 行星齿轮
+        Part p1 = new Part();
+        p1.setPartCode("MAT001");
+        p1.setPartName("行星齿轮");
+        p1.setSpecModel("XCL-20");
+        p1.setSupplier("齿轮加工厂");
+        p1.setStockQuantity(150);
+        p1.setCreateTime(now);
+        p1.setLastUpdateTime(now);
+        partRepository.save(p1);
+        log.info("已保存物料: MAT001 - 行星齿轮");
+
+        // MAT002 深沟球轴承
+        Part p2 = new Part();
+        p2.setPartCode("MAT002");
+        p2.setPartName("深沟球轴承");
+        p2.setSpecModel("6204-2RS");
+        p2.setSupplier("轴承厂");
+        p2.setStockQuantity(45);
+        p2.setCreateTime(now);
+        p2.setLastUpdateTime(now);
+        partRepository.save(p2);
+        log.info("已保存物料: MAT002 - 深沟球轴承");
+
+        // MAT003 O型密封圈
+        Part p3 = new Part();
+        p3.setPartCode("MAT003");
+        p3.setPartName("O型密封圈");
+        p3.setSpecModel("OR-30x3.5");
+        p3.setSupplier("密封件厂");
+        p3.setStockQuantity(320);
+        p3.setCreateTime(now);
+        p3.setLastUpdateTime(now);
+        partRepository.save(p3);
+        log.info("已保存物料: MAT003 - O型密封圈");
+
+        // MAT004 行星架
+        Part p4 = new Part();
+        p4.setPartCode("MAT004");
+        p4.setPartName("行星架");
+        p4.setSpecModel("XJ-15");
+        p4.setSupplier("铸造厂");
+        p4.setStockQuantity(28);
+        p4.setCreateTime(now);
+        p4.setLastUpdateTime(now);
+        partRepository.save(p4);
+        log.info("已保存物料: MAT004 - 行星架");
+
+        // MAT005 内六角螺钉
+        Part p5 = new Part();
+        p5.setPartCode("MAT005");
+        p5.setPartName("内六角螺钉");
+        p5.setSpecModel("M8x25");
+        p5.setSupplier("标准件厂");
+        p5.setStockQuantity(580);
+        p5.setCreateTime(now);
+        p5.setLastUpdateTime(now);
+        partRepository.save(p5);
+        log.info("已保存物料: MAT005 - 内六角螺钉");
+
+        // MAT006 PCB板
+        Part p6 = new Part();
+        p6.setPartCode("MAT006");
+        p6.setPartName("PCB板");
+        p6.setSpecModel("DRV-8301");
+        p6.setSupplier("电子厂");
+        p6.setStockQuantity(85);
+        p6.setCreateTime(now);
+        p6.setLastUpdateTime(now);
+        partRepository.save(p6);
+        log.info("已保存物料: MAT006 - PCB板");
+
+        log.info("所有物料保存完成，共 6 条");
+    }
+
+    @Transactional
+    public void initializeWorkingPlansAndProcedures() {
+        LocalDateTime now = LocalDateTime.now();
+
+        // 工艺路线1: 中心轮零件加工
+        WorkingPlan plan1 = new WorkingPlan();
+        plan1.setPlanCode("ROUTE001");
+        plan1.setPlanName("中心轮零件加工");
+        plan1.setVersion("1.0");
+        plan1.setEquipmentUsage("数控车床、数控铣床、铸造机、三坐标测量仪、叉车");
+        plan1.setOperator("综合");
+        plan1.setOperationTime(now);
+        plan1.setCreateTime(now);
+        plan1.setLastUpdateTime(now);
+        WorkingPlan savedPlan = workingPlanRepository.save(plan1);
+        log.info("已保存工艺: ROUTE001 - 中心轮零件加工, id={}", savedPlan.getId());
+
+        // 独立工序数据 (processes)
+        // P001 毛坯制造
+        WorkingProcedure proc1 = new WorkingProcedure();
+        proc1.setProcedureCode("P001");
+        proc1.setProcedureName("毛坯制造");
+        proc1.setProductionStep("铸造/锻造");
+        proc1.setOperator("张三");
+        proc1.setStartTime(LocalDateTime.of(2024, 1, 1, 8, 0));
+        proc1.setEndTime(LocalDateTime.of(2024, 1, 1, 12, 0));
+        proc1.setPlan2PartId(savedPlan.getId());
+        proc1.setCreateTime(now);
+        proc1.setLastUpdateTime(now);
+        workingProcedureRepository.save(proc1);
+        log.info("已保存工序: P001 - 毛坯制造");
+
+        // P002 粗加工
+        WorkingProcedure proc2 = new WorkingProcedure();
+        proc2.setProcedureCode("P002");
+        proc2.setProcedureName("粗加工");
+        proc2.setProductionStep("铣削、钻孔");
+        proc2.setOperator("李四");
+        proc2.setStartTime(LocalDateTime.of(2024, 1, 1, 13, 0));
+        proc2.setEndTime(LocalDateTime.of(2024, 1, 1, 17, 0));
+        proc2.setPlan2PartId(savedPlan.getId());
+        proc2.setCreateTime(now);
+        proc2.setLastUpdateTime(now);
+        workingProcedureRepository.save(proc2);
+        log.info("已保存工序: P002 - 粗加工");
+
+        // P003 精加工
+        WorkingProcedure proc3 = new WorkingProcedure();
+        proc3.setProcedureCode("P003");
+        proc3.setProcedureName("精加工");
+        proc3.setProductionStep("车削、磨削");
+        proc3.setOperator("王五");
+        proc3.setStartTime(LocalDateTime.of(2024, 1, 2, 8, 0));
+        proc3.setEndTime(LocalDateTime.of(2024, 1, 2, 16, 0));
+        proc3.setPlan2PartId(savedPlan.getId());
+        proc3.setCreateTime(now);
+        proc3.setLastUpdateTime(now);
+        workingProcedureRepository.save(proc3);
+        log.info("已保存工序: P003 - 精加工");
+
+        // P004 检测
+        WorkingProcedure proc4 = new WorkingProcedure();
+        proc4.setProcedureCode("P004");
+        proc4.setProcedureName("检测");
+        proc4.setProductionStep("三坐标测量");
+        proc4.setOperator("赵六");
+        proc4.setStartTime(LocalDateTime.of(2024, 1, 3, 9, 0));
+        proc4.setEndTime(LocalDateTime.of(2024, 1, 3, 11, 0));
+        proc4.setPlan2PartId(savedPlan.getId());
+        proc4.setCreateTime(now);
+        proc4.setLastUpdateTime(now);
+        workingProcedureRepository.save(proc4);
+        log.info("已保存工序: P004 - 检测");
+
+        // P005 入库
+        WorkingProcedure proc5 = new WorkingProcedure();
+        proc5.setProcedureCode("P005");
+        proc5.setProcedureName("入库");
+        proc5.setProductionStep("包装、入库");
+        proc5.setOperator("钱七");
+        proc5.setStartTime(LocalDateTime.of(2024, 1, 3, 14, 0));
+        proc5.setEndTime(LocalDateTime.of(2024, 1, 3, 16, 0));
+        proc5.setPlan2PartId(savedPlan.getId());
+        proc5.setCreateTime(now);
+        proc5.setLastUpdateTime(now);
+        workingProcedureRepository.save(proc5);
+        log.info("已保存工序: P005 - 入库");
+
+        // P006 热处理
+        WorkingProcedure proc6 = new WorkingProcedure();
+        proc6.setProcedureCode("P006");
+        proc6.setProcedureName("热处理");
+        proc6.setProductionStep("淬火、回火");
+        proc6.setOperator("孙八");
+        proc6.setStartTime(LocalDateTime.of(2024, 1, 4, 8, 0));
+        proc6.setEndTime(LocalDateTime.of(2024, 1, 4, 12, 0));
+        proc6.setPlan2PartId(savedPlan.getId());
+        proc6.setCreateTime(now);
+        proc6.setLastUpdateTime(now);
+        workingProcedureRepository.save(proc6);
+        log.info("已保存工序: P006 - 热处理");
+
+        log.info("所有工艺及工序保存完成");
+    }
+
+    @Transactional
+    public void initializeProcessChain() {
+        LocalDateTime now = LocalDateTime.now();
+
+        // 入库记录
+        Warehousing warehousing = new Warehousing();
+        warehousing.setCreateTime(now);
+        warehousing.setLastUpdateTime(now);
+        Warehousing savedWarehousing = warehousingRepository.save(warehousing);
+        log.info("已保存入库记录, id={}", savedWarehousing.getId());
+
+        // 尺寸检测（IQC 关联入库）
+        DimensionalInspecting iqc = new DimensionalInspecting();
+        iqc.setIqcWarehousingId(savedWarehousing.getId());
+        iqc.setCreateTime(now);
+        iqc.setLastUpdateTime(now);
+        DimensionalInspecting savedIqc = dimensionalInspectingRepository.save(iqc);
+        log.info("已保存尺寸检测(IQC), id={}", savedIqc.getId());
+
+        // 轴类零件加工（FQC 关联尺寸检测）
+        ShaftMachining shaftMachining = new ShaftMachining();
+        shaftMachining.setFqcDimensionalInspectingId(savedIqc.getId());
+        shaftMachining.setCreateTime(now);
+        shaftMachining.setLastUpdateTime(now);
+        ShaftMachining savedShaft = shaftMachiningRepository.save(shaftMachining);
+        log.info("已保存轴类零件加工, id={}", savedShaft.getId());
+
+        // 机械加工（关联轴类零件加工）
+        Machining machining = new Machining();
+        machining.setMachiningShaftMachiningId(savedShaft.getId());
+        machining.setCreateTime(now);
+        machining.setLastUpdateTime(now);
+        Machining savedMachining = machiningRepository.save(machining);
+        log.info("已保存机械加工, id={}", savedMachining.getId());
+
+        // 毛坯制造（关联机械加工）
+        BlankManufacturing blankManufacturing = new BlankManufacturing();
+        blankManufacturing.setMachiningId(savedMachining.getId());
+        blankManufacturing.setCreateTime(now);
+        blankManufacturing.setLastUpdateTime(now);
+        BlankManufacturing savedBlank = blankManufacturingRepository.save(blankManufacturing);
+        log.info("已保存毛坯制造, id={}", savedBlank.getId());
+
+        log.info("工艺过程链初始化完成");
     }
 
     private String createParamsJson(Map<String, String> params) {
