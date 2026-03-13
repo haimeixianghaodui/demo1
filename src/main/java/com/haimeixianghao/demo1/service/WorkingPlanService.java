@@ -3,6 +3,9 @@ package com.haimeixianghao.demo1.service;
 import com.haimeixianghao.demo1.dto.WorkingPlanDto;
 import com.haimeixianghao.demo1.entity.WorkingPlan;
 import com.haimeixianghao.demo1.repository.WorkingPlanRepository;
+import com.haimeixianghao.demo1.xdm.service.XdmWorkingPlanService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,11 +18,18 @@ public class WorkingPlanService {
 
     private final WorkingPlanRepository repository;
 
+    @Value("${idma.enabled:false}")
+    private boolean idmaEnabled;
+
+    @Autowired(required = false)
+    private XdmWorkingPlanService xdmService;
+
     public WorkingPlanService(WorkingPlanRepository repository) {
         this.repository = repository;
     }
 
     public WorkingPlanDto create(WorkingPlanDto dto) {
+        if (idmaEnabled && xdmService != null) return xdmService.create(dto);
         WorkingPlan e = toEntity(dto);
         e.setCreateTime(LocalDateTime.now());
         e.setLastUpdateTime(LocalDateTime.now());
@@ -27,16 +37,19 @@ public class WorkingPlanService {
     }
 
     public WorkingPlanDto getById(Long id) {
+        if (idmaEnabled && xdmService != null) return xdmService.getById(id);
         return repository.findById(id).map(this::toDto).orElse(null);
     }
 
     public List<WorkingPlanDto> findAll() {
+        if (idmaEnabled && xdmService != null) return xdmService.findAll();
         List<WorkingPlanDto> list = new ArrayList<>();
         repository.findAll().forEach(p -> list.add(toDto(p)));
         return list;
     }
 
     public List<WorkingPlanDto> search(String q) {
+        if (idmaEnabled && xdmService != null) return xdmService.search(q);
         List<WorkingPlan> byCode = repository.findByPlanCodeContainingIgnoreCase(q);
         List<WorkingPlan> byName = repository.findByPlanNameContainingIgnoreCase(q);
         List<WorkingPlanDto> result = new ArrayList<>();
@@ -47,6 +60,7 @@ public class WorkingPlanService {
     }
 
     public WorkingPlanDto update(Long id, WorkingPlanDto dto) {
+        if (idmaEnabled && xdmService != null) return xdmService.update(id, dto);
         Optional<WorkingPlan> o = repository.findById(id);
         if (o.isEmpty()) return null;
         WorkingPlan e = o.get();
@@ -61,6 +75,7 @@ public class WorkingPlanService {
     }
 
     public boolean delete(Long id) {
+        if (idmaEnabled && xdmService != null) return xdmService.delete(id);
         if (!repository.existsById(id)) return false;
         repository.deleteById(id);
         return true;

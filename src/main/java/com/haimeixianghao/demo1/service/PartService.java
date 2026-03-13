@@ -3,6 +3,9 @@ package com.haimeixianghao.demo1.service;
 import com.haimeixianghao.demo1.dto.PartDto;
 import com.haimeixianghao.demo1.entity.Part;
 import com.haimeixianghao.demo1.repository.PartRepository;
+import com.haimeixianghao.demo1.xdm.service.XdmPartService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,11 +18,18 @@ public class PartService {
 
     private final PartRepository repository;
 
+    @Value("${idma.enabled:false}")
+    private boolean idmaEnabled;
+
+    @Autowired(required = false)
+    private XdmPartService xdmService;
+
     public PartService(PartRepository repository) {
         this.repository = repository;
     }
 
     public PartDto create(PartDto dto) {
+        if (idmaEnabled && xdmService != null) return xdmService.create(dto);
         Part e = toEntity(dto);
         e.setCreateTime(LocalDateTime.now());
         e.setLastUpdateTime(LocalDateTime.now());
@@ -27,16 +37,19 @@ public class PartService {
     }
 
     public PartDto getById(Long id) {
+        if (idmaEnabled && xdmService != null) return xdmService.getById(id);
         return repository.findById(id).map(this::toDto).orElse(null);
     }
 
     public List<PartDto> findAll() {
+        if (idmaEnabled && xdmService != null) return xdmService.findAll();
         List<PartDto> list = new ArrayList<>();
         repository.findAll().forEach(p -> list.add(toDto(p)));
         return list;
     }
 
     public List<PartDto> search(String q) {
+        if (idmaEnabled && xdmService != null) return xdmService.search(q);
         List<Part> byCode = repository.findByPartCodeContainingIgnoreCase(q);
         List<Part> byName = repository.findByPartNameContainingIgnoreCase(q);
         List<PartDto> result = new ArrayList<>();
@@ -47,6 +60,7 @@ public class PartService {
     }
 
     public PartDto update(Long id, PartDto dto) {
+        if (idmaEnabled && xdmService != null) return xdmService.update(id, dto);
         Optional<Part> o = repository.findById(id);
         if (o.isEmpty()) return null;
         Part e = o.get();
@@ -61,6 +75,7 @@ public class PartService {
     }
 
     public boolean delete(Long id) {
+        if (idmaEnabled && xdmService != null) return xdmService.delete(id);
         if (!repository.existsById(id)) return false;
         repository.deleteById(id);
         return true;

@@ -3,6 +3,9 @@ package com.haimeixianghao.demo1.service;
 import com.haimeixianghao.demo1.dto.WorkingProcedureDto;
 import com.haimeixianghao.demo1.entity.WorkingProcedure;
 import com.haimeixianghao.demo1.repository.WorkingProcedureRepository;
+import com.haimeixianghao.demo1.xdm.service.XdmWorkingProcedureService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,11 +18,18 @@ public class WorkingProcedureService {
 
     private final WorkingProcedureRepository repository;
 
+    @Value("${idma.enabled:false}")
+    private boolean idmaEnabled;
+
+    @Autowired(required = false)
+    private XdmWorkingProcedureService xdmService;
+
     public WorkingProcedureService(WorkingProcedureRepository repository) {
         this.repository = repository;
     }
 
     public WorkingProcedureDto create(WorkingProcedureDto dto) {
+        if (idmaEnabled && xdmService != null) return xdmService.create(dto);
         WorkingProcedure e = toEntity(dto);
         e.setCreateTime(LocalDateTime.now());
         e.setLastUpdateTime(LocalDateTime.now());
@@ -27,16 +37,19 @@ public class WorkingProcedureService {
     }
 
     public WorkingProcedureDto getById(Long id) {
+        if (idmaEnabled && xdmService != null) return xdmService.getById(id);
         return repository.findById(id).map(this::toDto).orElse(null);
     }
 
     public List<WorkingProcedureDto> findAll() {
+        if (idmaEnabled && xdmService != null) return xdmService.findAll();
         List<WorkingProcedureDto> list = new ArrayList<>();
         repository.findAll().forEach(p -> list.add(toDto(p)));
         return list;
     }
 
     public List<WorkingProcedureDto> search(String q) {
+        if (idmaEnabled && xdmService != null) return xdmService.search(q);
         List<WorkingProcedure> byCode = repository.findByProcedureCodeContainingIgnoreCase(q);
         List<WorkingProcedure> byName = repository.findByProcedureNameContainingIgnoreCase(q);
         List<WorkingProcedureDto> result = new ArrayList<>();
@@ -47,6 +60,7 @@ public class WorkingProcedureService {
     }
 
     public WorkingProcedureDto update(Long id, WorkingProcedureDto dto) {
+        if (idmaEnabled && xdmService != null) return xdmService.update(id, dto);
         Optional<WorkingProcedure> o = repository.findById(id);
         if (o.isEmpty()) return null;
         WorkingProcedure e = o.get();
@@ -60,6 +74,7 @@ public class WorkingProcedureService {
     }
 
     public boolean delete(Long id) {
+        if (idmaEnabled && xdmService != null) return xdmService.delete(id);
         if (!repository.existsById(id)) return false;
         repository.deleteById(id);
         return true;
